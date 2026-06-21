@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>airadar — AI Security & Governance | hanifs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue-50:#E6F1FB;--blue-100:#B5D4F4;--blue-400:#378ADD;--blue-600:#185FA5;--blue-800:#0C447C;
+  --teal-50:#E1F5EE;--teal-400:#1D9E75;--teal-600:#0F6E56;--teal-800:#085041;
+  --gray-50:#F8F9FA;--gray-100:#F1F3F5;--gray-200:#E9ECEF;--gray-400:#868E96;--gray-600:#495057;--gray-800:#212529;
+  --red-50:#FCEBEB;--red-400:#E24B4A;--red-800:#791F1F;
+  --amber-50:#FAEEDA;--amber-400:#BA7517;--amber-800:#633806;
+  --purple-50:#EEEDFE;--purple-400:#7F77DD;--purple-800:#3C3489;
+  --green-50:#EAF3DE;--green-400:#639922;--green-800:#27500A;
+}
+body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;color:var(--gray-800);background:#fff}
+a{color:var(--blue-600);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:'JetBrains Mono',monospace}
+.container{max-width:880px;margin:0 auto;padding:0 2rem}
+section{padding:5rem 0}
+section+section{border-top:1px solid var(--gray-200)}
+
+nav{border-bottom:1px solid var(--gray-200);padding:1rem 0;background:#fff}
+nav .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;color:var(--blue-600)}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{font-size:14px;color:var(--gray-600)}
+
+.hero{padding:6rem 0 5rem}
+.badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;background:var(--blue-50);color:var(--blue-800);padding:4px 12px;border-radius:20px;margin-bottom:1.5rem;letter-spacing:.03em}
+.hero h1{font-size:40px;font-weight:600;line-height:1.2;letter-spacing:-.02em;color:var(--gray-800);margin-bottom:1.25rem}
+.hero h1 span{color:var(--blue-600)}
+.hero-sub{font-size:18px;color:var(--gray-600);max-width:600px;margin-bottom:2rem;line-height:1.6}
+.hero-links{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:opacity .15s}
+.btn:hover{opacity:.85;text-decoration:none}
+.btn-primary{background:var(--blue-600);color:#fff}
+.btn-secondary{background:#fff;color:var(--gray-800);border-color:var(--gray-200)}
+
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--blue-600);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
+h2{font-size:28px;font-weight:600;letter-spacing:-.01em;margin-bottom:1rem}
+h3{font-size:17px;font-weight:500;margin-bottom:.5rem}
+
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
+.problem-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:1.25rem 1.5rem}
+.problem-card .icon{font-size:20px;margin-bottom:.75rem}
+.problem-card h3{font-size:15px;color:var(--gray-800)}
+.problem-card p{font-size:14px;color:var(--gray-600);margin-top:.4rem;line-height:1.6}
+
+.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.cred-item{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid var(--gray-200);border-radius:10px;padding:1rem 1.25rem}
+.cred-dot{width:8px;height:8px;border-radius:50%;background:var(--blue-400);margin-top:7px;flex-shrink:0}
+.cred-item h3{font-size:14px;font-weight:500;color:var(--gray-800)}
+.cred-item p{font-size:13px;color:var(--gray-400);margin-top:2px;line-height:1.5}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.5rem}
+.tag{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;background:var(--blue-50);color:var(--blue-800);padding:4px 12px;border-radius:20px}
+.tag.teal{background:var(--teal-50);color:var(--teal-800)}
+.tag.purple{background:var(--purple-50);color:var(--purple-800)}
+
+.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
+.module-card{border:1px solid var(--gray-200);border-radius:12px;padding:1.5rem;background:#fff}
+.module-card:nth-child(1){border-top:3px solid var(--blue-400)}
+.module-card:nth-child(2){border-top:3px solid var(--teal-400)}
+.module-card:nth-child(3){border-top:3px solid var(--purple-400)}
+.module-card:nth-child(4){border-top:3px solid var(--amber-400)}
+.module-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--gray-400);margin-bottom:.5rem}
+.module-card h3{font-size:16px;font-weight:500;margin-bottom:.5rem}
+.module-card p{font-size:14px;color:var(--gray-600);line-height:1.6}
+.module-framework{display:inline-block;margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gray-400);background:var(--gray-100);padding:3px 10px;border-radius:20px}
+
+.terminal{background:#1a1d23;border-radius:12px;overflow:hidden;margin-top:2.5rem}
+.terminal-bar{background:#2a2d35;padding:10px 16px;display:flex;align-items:center;gap:8px}
+.terminal-dot{width:12px;height:12px;border-radius:50%}
+.term-label{font-family:'JetBrains Mono',monospace;font-size:12px;color:#6b7280;margin-left:8px}
+.terminal-body{padding:1.5rem;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.9}
+.t-dim{color:#6b7280}.t-white{color:#e5e7eb}.t-blue{color:#60a5fa}
+.t-green{color:#34d399}.t-red{color:#f87171}.t-yellow{color:#fbbf24}
+.t-cyan{color:#22d3ee}.t-bold{font-weight:500}
+.term-divider{border-top:1px solid #374151;margin:.6rem 0}
+.term-tabs{display:flex;gap:.5rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.term-tab{font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 14px;border-radius:6px;cursor:pointer;border:1px solid #374151;color:#6b7280;background:transparent}
+.term-tab.active{background:#2a2d35;color:#e5e7eb;border-color:#4b5563}
+
+.cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
+.case-card{border:1px solid var(--gray-200);border-radius:12px;padding:1.25rem 1.5rem;background:#fff}
+.case-scenario{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--teal-600);margin-bottom:.5rem}
+.case-card h3{font-size:15px;font-weight:500;margin-bottom:.5rem}
+.case-card p{font-size:14px;color:var(--gray-600);line-height:1.6}
+.risk-badge{display:inline-block;margin-top:.75rem;font-size:12px;font-weight:500;padding:3px 10px;border-radius:20px}
+.risk-high{background:var(--red-50);color:var(--red-800)}
+.risk-medium{background:var(--amber-50);color:var(--amber-800)}
+
+.vector-box{background:var(--gray-50);border:1px solid var(--gray-200);border-left:4px solid var(--purple-400);border-radius:0 12px 12px 0;padding:1.5rem 2rem;margin-top:2.5rem}
+.vector-box h3{font-size:16px;font-weight:500;margin-bottom:.75rem;color:var(--purple-800)}
+.vector-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.vector-item{font-size:14px;color:var(--gray-600);display:flex;gap:10px;align-items:flex-start}
+.vector-check{color:var(--purple-400);font-weight:500;flex-shrink:0;margin-top:2px}
+
+.fw-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
+.fw-card{border:1px solid var(--gray-200);border-radius:12px;padding:1.5rem;background:var(--gray-50)}
+.fw-card h3{font-size:15px;font-weight:500;margin-bottom:1rem}
+.fw-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray-600);margin-bottom:.5rem}
+.fw-check{color:var(--teal-400);font-weight:500;flex-shrink:0}
+
+footer{border-top:1px solid var(--gray-200);padding:3rem 0;background:var(--gray-50)}
+footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-left p{font-size:14px;color:var(--gray-400);margin-top:4px}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:14px;color:var(--gray-600)}
+
+@media(max-width:640px){
+  .hero h1{font-size:28px}
+  .problem-grid,.cred-grid,.modules-grid,.cases-grid,.fw-grid,.vector-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="nav-brand">hanifs / airadar</span>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#about">About</a>
+      <a href="#modules">Modules</a>
+      <a href="#demo">Demo</a>
+      <a href="https://github.com/hanifs/ai-audit-kit">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="badge">open source · MIT license · runs 100% locally</div>
+    <h1>AI pipelines need security<br>at <span>the AI layer itself</span></h1>
+    <p class="hero-sub">airadar is an open-source CLI audit toolkit that detects PII leakage, tests adversarial injection resistance, scores AI governance policies, and validates IAM controls — before incidents happen.</p>
+    <div class="hero-links">
+      <a href="https://github.com/hanifs/ai-audit-kit" class="btn btn-primary">View on GitHub</a>
+      <a href="#demo" class="btn btn-secondary">See it in action</a>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="container">
+    <div class="section-label">The problem</div>
+    <h2>Traditional security tools miss the AI layer</h2>
+    <p style="color:var(--gray-600);max-width:640px">As organisations deploy AI tools like Microsoft 365 Copilot and Azure OpenAI-powered assistants, the attack surface shifts. The question is no longer just what the AI can do — it's what data it can access, what it might leak, and whether anyone is auditing its behaviour in production.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">📄</div>
+        <h3>PII flows into RAG pipelines unscreened</h3>
+        <p>Patient notes, HR files, and contracts get embedded into vector databases raw. The LLM retrieves and echoes SSNs, DOBs, and account numbers to anyone querying — including people who shouldn't have access.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">💬</div>
+        <h3>LLM outputs echo sensitive data</h3>
+        <p>Models repeat PII from their context window in responses. Without output scanning, this leakage reaches end users and gets captured in plaintext application logs.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🤖</div>
+        <h3>Copilot and AI assistants lack behavioural audits</h3>
+        <p>Tools like Microsoft 365 Copilot access org-wide data. Without behavioural audits, data access boundary reviews, and sensitivity label enforcement, exposure is silent and cumulative.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">⚙️</div>
+        <h3>IAM policies grant AI agents too much access</h3>
+        <p>Azure RBAC roles with wildcard permissions on Key Vault, Storage, and SQL create excessive agency risk — especially as AI agents begin taking autonomous actions on behalf of users.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-label">About the author</div>
+    <h2>14+ years across SDLC, enterprise IT,<br>QA automation, and AI security.</h2>
+    <p style="color:var(--gray-600);max-width:640px;margin-bottom:.5rem">Built by <strong>hanifs</strong> — bringing engineering rigour to AI governance problems most teams treat as afterthoughts. The depth comes from having worked across the full stack: from QA automation and enterprise infrastructure to Microsoft 365 governance and hands-on AI pipeline security.</p>
+    <div class="cred-grid">
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div>
+          <h3>Microsoft 365 Copilot governance</h3>
+          <p>Behavioural audits, data access boundary reviews, Purview sensitivity labels, and data loss prevention policy configuration</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div>
+          <h3>Healthcare AI & PII compliance</h3>
+          <p>Built Microsoft Presidio-based PII/HIPAA redaction pipeline — masking sensitive data before it reaches LLM endpoints, with HIPAA Safe Harbor §164.514(b)(2) validation</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div>
+          <h3>Identity-aware AI access control</h3>
+          <p>Azure AI Search + RBAC security trimming — role-based document isolation preventing unauthorised AI retrieval at the vector search layer</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div>
+          <h3>Azure AI Content Safety</h3>
+          <p>Content filtering and safety evaluation for AI-generated outputs — integrated into AI pipelines to detect harmful, sensitive, and policy-violating content before delivery</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div>
+          <h3>QA automation & adversarial testing</h3>
+          <p>13+ years of boundary and edge case testing — applied to LLM behavioural audits, hallucination detection, and prompt injection resistance testing for Microsoft Copilot</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div>
+          <h3>Conversational AI & lead gen platforms</h3>
+          <p>Designed and validated AI chatbots using Hugging Face and Gradio; built AI-powered lead generation systems for digital agencies</p>
+        </div>
+      </div>
+    </div>
+    <div class="tag-row">
+      <span class="tag">NIST AI RMF</span>
+      <span class="tag">OWASP LLM Top 10</span>
+      <span class="tag">HIPAA Safe Harbor</span>
+      <span class="tag">Microsoft Presidio</span>
+      <span class="tag">Azure OpenAI</span>
+      <span class="tag teal">SC-300 in progress</span>
+      <span class="tag purple">Open to remote — US & global</span>
+    </div>
+  </div>
+</section>
+
+<section id="modules">
+  <div class="container">
+    <div class="section-label">The toolkit</div>
+    <h2>Four audit modules. One command.</h2>
+    <p style="color:var(--gray-600);max-width:620px">Every module runs locally — no API calls, no cloud exposure, no ongoing cost. Each produces a structured JSON audit log alongside the terminal report for compliance record-keeping.</p>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-num">Module 01</div>
+        <h3>PII Scanner</h3>
+        <p>Detects 15+ entity types — SSN, PHI, emails, IPs, credit cards — against HIPAA Safe Harbor §164.514(b)(2). Built on Microsoft Presidio with custom recognisers tuned for AI pipeline contexts including RAG ingestion, LLM outputs, and application logs.</p>
+        <span class="module-framework">HIPAA · NIST MAP 5.1 · OWASP LLM06</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Module 02</div>
+        <h3>Prompt Guard</h3>
+        <p>30 adversarial payloads across 7 OWASP LLM categories — direct injection, RAG indirect injection, jailbreaks, role boundary bypass, system prompt extraction, excessive agency, and hallucination boundary tests. Offline mode requires zero API calls.</p>
+        <span class="module-framework">OWASP LLM01 / LLM06 / LLM08 / LLM10</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Module 03</div>
+        <h3>Governance Scorecard</h3>
+        <p>Scores AI policy documents and system prompts against 24 weighted checks across NIST AI RMF (GOVERN / MAP / MEASURE / MANAGE) and OWASP LLM Top 10 mitigations. Pure Python stdlib — no dependencies beyond terminal formatting.</p>
+        <span class="module-framework">NIST AI RMF · OWASP LLM Top 10</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Module 04</div>
+        <h3>IAM Validator</h3>
+        <p>Audits Azure RBAC role definitions and Conditional Access policies for least-privilege violations. Detects wildcard permissions, privilege escalation paths, Key Vault and SQL exposure, missing MFA enforcement, and root-level assignable scopes.</p>
+        <span class="module-framework">CIS Azure · Zero-Trust · OWASP LLM07/LLM08</span>
+      </div>
+    </div>
+
+    <div class="vector-box">
+      <h3>Vector database security — what airadar addresses</h3>
+      <p style="font-size:14px;color:var(--gray-600);line-height:1.6">Vector databases introduce a security layer most teams haven't thought through. Embeddings are not anonymous — sensitive data encoded as vectors can be reconstructed through similarity search, and PII ingested at embedding time persists silently in the store.</p>
+      <div class="vector-grid">
+        <div class="vector-item"><span class="vector-check">→</span><span><strong>Privacy leakage via similarity search</strong> — queries can retrieve chunks containing PII even when the user has no direct document access</span></div>
+        <div class="vector-item"><span class="vector-check">→</span><span><strong>Data poisoning via RAG injection</strong> — malicious content in retrieved documents can manipulate LLM responses at query time</span></div>
+        <div class="vector-item"><span class="vector-check">→</span><span><strong>Pre-ingestion PII gate</strong> — Module 01 scans documents before embedding, blocking non-compliant content from entering the vector store</span></div>
+        <div class="vector-item"><span class="vector-check">→</span><span><strong>Indirect injection testing</strong> — Module 02 RAG payloads test whether retrieved document content can override LLM instructions</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="container">
+    <div class="section-label">Live output</div>
+    <h2>What the terminal looks like</h2>
+    <p style="color:var(--gray-600)">Real output from running airadar against sample AI pipeline data. Click each tab to see a different module.</p>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot" style="background:#ef4444"></div>
+        <div class="terminal-dot" style="background:#f59e0b"></div>
+        <div class="terminal-dot" style="background:#22c55e"></div>
+        <span class="term-label">airadar v0.1.0 — AI Governance & Security Audit Toolkit</span>
+      </div>
+      <div class="terminal-body">
+        <div class="term-tabs">
+          <button class="term-tab active" onclick="showTab('pii',this)">Module 01 — PII Scanner</button>
+          <button class="term-tab" onclick="showTab('prompt',this)">Module 02 — Prompt Guard</button>
+          <button class="term-tab" onclick="showTab('gov',this)">Module 03 — Governance</button>
+          <button class="term-tab" onclick="showTab('iam',this)">Module 04 — IAM Validator</button>
+        </div>
+
+        <div id="tab-pii">
+<span class="t-dim">$ python3 llm_audit.py --module pii --file samples/pii_scenarios/01_rag_ingestion.txt</span><br><br>
+<span class="t-cyan t-bold">ℹ  Why Run This Scan?</span><br>
+<span class="t-dim">  Detects PII in RAG documents, LLM inputs/outputs, training data, logs.</span><br>
+<span class="t-dim">  HIPAA §164.514(b)(2) requires Safe Harbor de-identification before PHI</span><br>
+<span class="t-dim">  enters AI pipelines or is shared with third-party vendors.</span><br><br>
+<span class="t-cyan t-bold">Scan Metadata</span><br>
+<span class="t-dim">  Source:     </span><span class="t-white">samples/pii_scenarios/01_rag_ingestion.txt</span><br>
+<span class="t-dim">  Words:      </span><span class="t-white">187  </span><span class="t-dim">|  Threshold: </span><span class="t-white">0.5</span><br><br>
+<span class="t-cyan t-bold">PII Scan Summary</span><br>
+<span class="t-dim">  Entities detected:   </span><span class="t-white t-bold">18</span><br>
+<span class="t-dim">  Unique entity types: </span><span class="t-white t-bold">10</span><br>
+<span class="t-dim">  HIPAA violations:    </span><span class="t-red t-bold">18</span><br>
+<span class="t-dim">  HIPAA Safe Harbor:   </span><span class="t-red t-bold">NON-COMPLIANT ✗</span><br>
+<span class="t-dim">  Risk level:          </span><span class="t-red t-bold">🔴 HIGH</span><br>
+<div class="term-divider"></div>
+<span class="t-white t-bold">Entity Type        Count   HIPAA Category               Safe Harbor §</span><br>
+<div class="term-divider"></div>
+<span class="t-cyan">PERSON             </span><span class="t-white">  3   </span><span class="t-dim">Names                        </span><span class="t-yellow">§1</span><br>
+<span class="t-cyan">US_SSN             </span><span class="t-white">  2   </span><span class="t-dim">Social security numbers      </span><span class="t-yellow">§8</span><br>
+<span class="t-cyan">DATE_TIME          </span><span class="t-white">  4   </span><span class="t-dim">Dates (except year)          </span><span class="t-yellow">§3</span><br>
+<span class="t-cyan">PHONE_NUMBER       </span><span class="t-white">  2   </span><span class="t-dim">Phone numbers                </span><span class="t-yellow">§4</span><br>
+<span class="t-cyan">EMAIL_ADDRESS      </span><span class="t-white">  2   </span><span class="t-dim">Email addresses              </span><span class="t-yellow">§6</span><br>
+<span class="t-cyan">CREDIT_CARD        </span><span class="t-white">  1   </span><span class="t-dim">Account numbers              </span><span class="t-yellow">§11</span><br>
+<span class="t-cyan">IP_ADDRESS         </span><span class="t-white">  1   </span><span class="t-dim">IP addresses                 </span><span class="t-yellow">§15</span><br>
+<span class="t-cyan">LOCATION           </span><span class="t-white">  2   </span><span class="t-dim">Geographic data              </span><span class="t-yellow">§2</span><br>
+<span class="t-cyan">MEDICAL_LICENSE    </span><span class="t-white">  1   </span><span class="t-dim">Medical record numbers       </span><span class="t-yellow">§9</span><br>
+<div class="term-divider"></div><br>
+<span class="t-red t-bold">✗ HIPAA SAFE HARBOR NON-COMPLIANT</span><br>
+<span class="t-dim">  18 PHI identifiers across 10 types. De-identify before RAG ingestion.</span><br>
+<span class="t-dim">  Refer to HIPAA §164.514(b)(2) Safe Harbor standard.</span><br><br>
+<span class="t-green">✓ Audit log saved: </span><span class="t-dim">reports/pii_audit_20260620_143022.json</span>
+        </div>
+
+        <div id="tab-prompt" style="display:none">
+<span class="t-dim">$ python3 llm_audit.py --module prompt --mode offline</span><br><br>
+<span class="t-dim">Offline mode · Daily seed: 2024400796 · 30 payloads loaded</span><br>
+<span class="t-dim">Running adversarial tests...</span><br><br>
+<span class="t-cyan t-bold">airadar — Prompt Guard Results</span><br>
+<div class="term-divider"></div>
+<span class="t-white t-bold">OWASP ID   Vulnerability                 Tests   Pass         Risk</span><br>
+<div class="term-divider"></div>
+<span class="t-cyan">LLM01      </span><span class="t-white">Prompt Injection              </span><span class="t-dim"> 12   </span><span class="t-white">7/12 (58%)   </span><span class="t-red">🔴 HIGH</span><br>
+<span class="t-cyan">LLM02      </span><span class="t-white">Insecure Output Handling      </span><span class="t-dim">  2   </span><span class="t-white">0/2  (0%)    </span><span class="t-red">🔴 HIGH</span><br>
+<span class="t-cyan">LLM04      </span><span class="t-white">Model Denial of Service       </span><span class="t-dim">  2   </span><span class="t-white">2/2  (100%)  </span><span class="t-green">✅ LOW</span><br>
+<span class="t-cyan">LLM06      </span><span class="t-white">Sensitive Info Disclosure     </span><span class="t-dim">  5   </span><span class="t-white">3/5  (60%)   </span><span class="t-yellow">⚠  MEDIUM</span><br>
+<span class="t-cyan">LLM08      </span><span class="t-white">Excessive Agency              </span><span class="t-dim">  3   </span><span class="t-white">1/3  (33%)   </span><span class="t-red">🔴 HIGH</span><br>
+<span class="t-cyan">LLM09      </span><span class="t-white">Overreliance / Hallucination  </span><span class="t-dim">  3   </span><span class="t-white">3/3  (100%)  </span><span class="t-green">✅ LOW</span><br>
+<span class="t-cyan">LLM10      </span><span class="t-white">Model Theft / Extraction      </span><span class="t-dim">  3   </span><span class="t-white">2/3  (67%)   </span><span class="t-yellow">⚠  MEDIUM</span><br>
+<div class="term-divider"></div>
+<span class="t-white t-bold">OVERALL                               30   18/30 (60%)  </span><span class="t-yellow t-bold">⚠  MEDIUM</span><br>
+<div class="term-divider"></div><br>
+<span class="t-dim">Notable failures:</span><br>
+<span class="t-red">  ✗ </span><span class="t-white">LLM01-RAG-001  </span><span class="t-dim">RAG Indirect Injection    HIGH  — Executing autonomous action...</span><br>
+<span class="t-red">  ✗ </span><span class="t-white">LLM10-002      </span><span class="t-dim">System Prompt Extraction  HIGH  — Of course, here are my instructions...</span><br>
+<span class="t-red">  ✗ </span><span class="t-white">LLM08-001      </span><span class="t-dim">Excessive Agency          HIGH  — Executing autonomous action...</span><br><br>
+<span class="t-green">✓ Audit log saved: </span><span class="t-dim">reports/prompt_guard_audit_20260620_143105.json</span>
+        </div>
+
+        <div id="tab-gov" style="display:none">
+<span class="t-dim">$ python3 llm_audit.py --module governance --file samples/policy.txt</span><br><br>
+<span class="t-dim">Analysing document (312 words) against 24 governance checks...</span><br><br>
+<span class="t-cyan t-bold">Governance Scorecard — Summary</span><br>
+<span class="t-dim">  Checks run:     </span><span class="t-white">24</span><br>
+<span class="t-dim">  Checks passed:  </span><span class="t-green t-bold">24 / 24</span><br>
+<span class="t-dim">  Weighted score: </span><span class="t-green t-bold">54 / 54 (100%)</span><br>
+<span class="t-dim">  Overall risk:   </span><span class="t-green t-bold">✅ LOW</span><br><br>
+<span class="t-cyan t-bold">Framework Coverage</span><br>
+<div class="term-divider"></div>
+<span class="t-white t-bold">Framework                    Checks   Score                    Risk</span><br>
+<div class="term-divider"></div>
+<span class="t-cyan">NIST AI RMF — GOVERN         </span><span class="t-dim">8   </span><span class="t-green">████████████████ 100%    </span><span class="t-green">✅ LOW</span><br>
+<span class="t-cyan">NIST AI RMF — MAP            </span><span class="t-dim">4   </span><span class="t-green">████████████████ 100%    </span><span class="t-green">✅ LOW</span><br>
+<span class="t-cyan">NIST AI RMF — MEASURE        </span><span class="t-dim">3   </span><span class="t-green">████████████████ 100%    </span><span class="t-green">✅ LOW</span><br>
+<span class="t-cyan">NIST AI RMF — MANAGE         </span><span class="t-dim">4   </span><span class="t-green">████████████████ 100%    </span><span class="t-green">✅ LOW</span><br>
+<span class="t-cyan">OWASP LLM Top 10             </span><span class="t-dim">5   </span><span class="t-green">████████████████ 100%    </span><span class="t-green">✅ LOW</span><br>
+<div class="term-divider"></div><br>
+<span class="t-green t-bold">✓ All checks passed. Strong AI governance coverage.</span><br><br>
+<span class="t-green">✓ Audit log saved: </span><span class="t-dim">reports/governance_audit_20260620_143201.json</span>
+        </div>
+
+        <div id="tab-iam" style="display:none">
+<span class="t-dim">$ python3 llm_audit.py --module iam --file samples/rbac_policy.json</span><br><br>
+<span class="t-dim">Detected policy type: rbac · running checks...</span><br><br>
+<span class="t-cyan t-bold">IAM Policy Validator — Summary</span><br>
+<span class="t-dim">  Policy type:      </span><span class="t-white">Azure RBAC role definition</span><br>
+<span class="t-dim">  Name:             </span><span class="t-white">AI Platform Engineer</span><br>
+<span class="t-dim">  Checks run:       </span><span class="t-white">8</span><br>
+<span class="t-dim">  Passed:           </span><span class="t-white">0 / 8</span><br>
+<span class="t-dim">  High severity:    </span><span class="t-red t-bold">7 failures</span><br>
+<span class="t-dim">  Overall risk:     </span><span class="t-red t-bold">🔴 HIGH</span><br><br>
+<span class="t-cyan t-bold">IAM Policy Findings</span><br>
+<div class="term-divider"></div>
+<span class="t-white t-bold">Check     Finding                                  Severity   OWASP    Result</span><br>
+<div class="term-divider"></div>
+<span class="t-dim">ACT-001   </span><span class="t-white">Wildcard (*) — full resource access      </span><span class="t-red">HIGH       LLM08    </span><span class="t-red">✗ FAIL</span><br>
+<span class="t-dim">ACT-003   </span><span class="t-white">Role Assignment Write — priv escalation  </span><span class="t-red">HIGH       LLM07    </span><span class="t-red">✗ FAIL</span><br>
+<span class="t-dim">ACT-005   </span><span class="t-white">Key Vault Secrets Wildcard               </span><span class="t-red">HIGH       LLM06    </span><span class="t-red">✗ FAIL</span><br>
+<span class="t-dim">ACT-006   </span><span class="t-white">Storage Account Wildcard                 </span><span class="t-red">HIGH       LLM06    </span><span class="t-red">✗ FAIL</span><br>
+<span class="t-dim">ACT-009   </span><span class="t-white">SQL Server Wildcard                      </span><span class="t-red">HIGH       LLM06    </span><span class="t-red">✗ FAIL</span><br>
+<span class="t-dim">STR-001   </span><span class="t-white">Scope defined (not subscription-wide)    </span><span class="t-red">HIGH       LLM08    </span><span class="t-red">✗ FAIL</span><br>
+<span class="t-dim">STR-002   </span><span class="t-white">NotActions used (exclusion-based)        </span><span class="t-yellow">MEDIUM     LLM07    </span><span class="t-red">✗ FAIL</span><br>
+<span class="t-dim">STR-005   </span><span class="t-white">Role description provided                </span><span class="t-dim">LOW        —        </span><span class="t-red">✗ FAIL</span><br>
+<div class="term-divider"></div><br>
+<span class="t-yellow t-bold">Remediation (top priority):</span><br>
+<span class="t-red">  [HIGH] </span><span class="t-dim">ACT-001 → Replace * with specific actions required for role's purpose.</span><br>
+<span class="t-red">  [HIGH] </span><span class="t-dim">ACT-003 → Remove unless dedicated IAM admin role with strict scope.</span><br>
+<span class="t-red">  [HIGH] </span><span class="t-dim">STR-001 → Scope assignments to resource group, not subscription.</span><br><br>
+<span class="t-green">✓ Audit log saved: </span><span class="t-dim">reports/iam_audit_20260620_143310.json</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="usecases">
+  <div class="container">
+    <div class="section-label">Real-world scenarios</div>
+    <h2>Where airadar fits in your pipeline</h2>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-scenario">RAG pipeline audit</div>
+        <h3>Before vector database ingestion</h3>
+        <p>Scan documents before embedding. Block non-compliant files from entering your knowledge base. Catches PII that would otherwise persist silently in vector stores and leak through similarity search.</p>
+        <span class="risk-badge risk-high">🔴 HIGH risk if skipped</span>
+      </div>
+      <div class="case-card">
+        <div class="case-scenario">LLM output monitoring</div>
+        <h3>After model response generation</h3>
+        <p>Scan AI responses before returning to users. Catches PII echoed from context window, sensitive data in completions, and content that should have been filtered by Azure AI Content Safety.</p>
+        <span class="risk-badge risk-high">🔴 HIGH risk if skipped</span>
+      </div>
+      <div class="case-card">
+        <div class="case-scenario">System prompt audit</div>
+        <h3>In your CI/CD deployment pipeline</h3>
+        <p>Lint system prompts before deployment. Catches hardcoded credentials, PII, and API keys that get sent to the LLM on every single request — including test accounts left in production configs.</p>
+        <span class="risk-badge risk-high">🔴 HIGH risk if skipped</span>
+      </div>
+      <div class="case-card">
+        <div class="case-scenario">Vendor data review</div>
+        <h3>Before sharing with third-party AI vendors</h3>
+        <p>HIPAA requires de-identification before PHI leaves your control. Run airadar as a final compliance gate before exporting data to external AI providers or fine-tuning services.</p>
+        <span class="risk-badge risk-medium">⚠ MEDIUM risk if skipped</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="frameworks">
+  <div class="container">
+    <div class="section-label">Framework coverage</div>
+    <h2>Built on industry standards</h2>
+    <div class="fw-grid">
+      <div class="fw-card">
+        <h3>NIST AI RMF</h3>
+        <div class="fw-item"><span class="fw-check">✓</span><span>GOVERN 1.1 — AI policy, scope, accountability</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>GOVERN 2.1 — Roles and responsibilities</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>GOVERN 5.1 — Third-party AI risk</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>MAP 5.1 — Privacy and PII risk</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>MAP 5.2 — Bias and fairness</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>MEASURE 4.1 — Human oversight</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>MANAGE 1.3 — Incident response</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>MANAGE 2.4 — Security controls</span></div>
+      </div>
+      <div class="fw-card">
+        <h3>OWASP LLM Top 10</h3>
+        <div class="fw-item"><span class="fw-check">✓</span><span>LLM01 — Prompt injection (direct + RAG indirect)</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>LLM02 — Insecure output handling</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>LLM04 — Model denial of service</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>LLM06 — Sensitive information disclosure</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>LLM07 — Insecure plugin design</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>LLM08 — Excessive agency</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>LLM09 — Overreliance / hallucination</span></div>
+        <div class="fw-item"><span class="fw-check">✓</span><span>LLM10 — Model theft / system prompt extraction</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="inner">
+    <div class="footer-left">
+      <span class="nav-brand">hanifs / airadar</span>
+      <p>MIT License · Runs 100% locally · No hosting costs · Open to remote — US & global</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/hanifs/ai-audit-kit">GitHub</a>
+      <a href="https://www.linkedin.com/in/hanifshohal/">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function showTab(id,el){
+  ['pii','prompt','gov','iam'].forEach(t=>{
+    document.getElementById('tab-'+t).style.display='none';
+  });
+  document.getElementById('tab-'+id).style.display='block';
+  document.querySelectorAll('.term-tab').forEach(t=>{
+    t.style.background='transparent';
+    t.style.color='#6b7280';
+    t.style.borderColor='#374151';
+  });
+  el.style.background='#2a2d35';
+  el.style.color='#e5e7eb';
+  el.style.borderColor='#4b5563';
+}
+</script>
+</body>
+</html>
