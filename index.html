@@ -122,7 +122,7 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
 
 <nav>
   <div class="inner">
-    <span class="nav-brand">hanifs / airadar</span>
+    <a href="#" class="nav-brand" style="text-decoration:none">hanifs / airadar</a>
     <div class="nav-links">
       <a href="#problem">Problem</a>
       <a href="#about">About</a>
@@ -170,7 +170,7 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
       <div class="problem-card">
         <div class="icon">⚙️</div>
         <h3>IAM policies grant AI agents too much access</h3>
-        <p>Azure RBAC roles with wildcard permissions on Key Vault, Storage, and SQL create excessive agency risk, especially as AI agents begin taking autonomous actions on behalf of users.</p>
+        <p>Azure RBAC roles with wildcard permissions on Key Vault, Storage, and SQL create excessive agency risk — especially as AI agents begin taking autonomous actions on behalf of users.</p>
       </div>
     </div>
   </div>
@@ -193,28 +193,28 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
         <div class="cred-dot"></div>
         <div>
           <h3>Healthcare AI & PII compliance</h3>
-          <p>Built Microsoft Presidio-based PII/HIPAA redaction pipeline: masking sensitive data before it reaches LLM endpoints, with HIPAA Safe Harbor §164.514(b)(2) validation</p>
+          <p>Built Microsoft Presidio-based PII/HIPAA redaction pipeline — masking sensitive data before it reaches LLM endpoints, with HIPAA Safe Harbor §164.514(b)(2) validation</p>
         </div>
       </div>
       <div class="cred-item">
         <div class="cred-dot"></div>
         <div>
           <h3>Identity-aware AI access control</h3>
-          <p>Azure AI Search + RBAC security trimming: role-based document isolation preventing unauthorised AI retrieval at the vector search layer</p>
+          <p>Azure AI Search + RBAC security trimming — role-based document isolation preventing unauthorised AI retrieval at the vector search layer</p>
         </div>
       </div>
       <div class="cred-item">
         <div class="cred-dot"></div>
         <div>
           <h3>Azure AI Content Safety</h3>
-          <p>Content filtering and safety evaluation for AI-generated outputs: integrated into AI pipelines to detect harmful, sensitive, and policy-violating content before delivery</p>
+          <p>Content filtering and safety evaluation for AI-generated outputs — integrated into AI pipelines to detect harmful, sensitive, and policy-violating content before delivery</p>
         </div>
       </div>
       <div class="cred-item">
         <div class="cred-dot"></div>
         <div>
           <h3>QA automation & adversarial testing</h3>
-          <p>13+ years of boundary and edge case testing: applied to LLM behavioural audits, hallucination detection, and prompt injection resistance testing for Microsoft Copilot</p>
+          <p>13+ years of boundary and edge case testing — applied to LLM behavioural audits, hallucination detection, and prompt injection resistance testing for Microsoft Copilot</p>
         </div>
       </div>
       <div class="cred-item">
@@ -241,18 +241,18 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
   <div class="container">
     <div class="section-label">The toolkit</div>
     <h2>Four audit modules. One command.</h2>
-    <p style="color:var(--gray-600);max-width:620px">Every module runs locally: no API calls, no cloud exposure, no ongoing cost. Each produces a structured JSON audit log alongside the terminal report for compliance record-keeping.</p>
+    <p style="color:var(--gray-600);max-width:620px">Every module runs locally — no API calls, no cloud exposure, no ongoing cost. Each produces a structured JSON audit log alongside the terminal report for compliance record-keeping.</p>
     <div class="modules-grid">
       <div class="module-card">
         <div class="module-num">Module 01</div>
         <h3>PII Scanner</h3>
-        <p>Detects 15+ entity types: SSN, PHI, emails, IPs, credit cards against HIPAA Safe Harbor §164.514(b)(2). Built on Microsoft Presidio with custom recognisers tuned for AI pipeline contexts including RAG ingestion, LLM outputs, and application logs.</p>
+        <p>Detects 15+ entity types — SSN, PHI, emails, IPs, credit cards — against HIPAA Safe Harbor §164.514(b)(2). Built on Microsoft Presidio with custom recognisers tuned for AI pipeline contexts including RAG ingestion, LLM outputs, and application logs.</p>
         <span class="module-framework">HIPAA · NIST MAP 5.1 · OWASP LLM06</span>
       </div>
       <div class="module-card">
         <div class="module-num">Module 02</div>
         <h3>Prompt Guard</h3>
-        <p>30 adversarial payloads across 7 OWASP LLM categories: direct injection, RAG indirect injection, jailbreaks, role boundary bypass, system prompt extraction, excessive agency, and hallucination boundary tests. Offline mode requires zero API calls.</p>
+        <p>30 adversarial payloads across 7 OWASP LLM categories — direct injection, RAG indirect injection, jailbreaks, role boundary bypass, system prompt extraction, excessive agency, and hallucination boundary tests. Offline mode requires zero API calls.</p>
         <span class="module-framework">OWASP LLM01 / LLM06 / LLM08 / LLM10</span>
       </div>
       <div class="module-card">
@@ -270,8 +270,8 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
     </div>
 
     <div class="vector-box">
-      <h3>Vector database security: what airadar addresses</h3>
-      <p style="font-size:14px;color:var(--gray-600);line-height:1.6">Vector databases introduce a security layer most teams haven't thought through. Embeddings are not anonymous, sensitive data encoded as vectors can be reconstructed through similarity search, and PII ingested at embedding time persists silently in the store.</p>
+      <h3>Vector database security — what airadar addresses</h3>
+      <p style="font-size:14px;color:var(--gray-600);line-height:1.6">Vector databases introduce a security layer most teams haven't thought through. Embeddings are not anonymous — sensitive data encoded as vectors can be reconstructed through similarity search, and PII ingested at embedding time persists silently in the store.</p>
       <div class="vector-grid">
         <div class="vector-item"><span class="vector-check">→</span><span><strong>Privacy leakage via similarity search</strong> — queries can retrieve chunks containing PII even when the user has no direct document access</span></div>
         <div class="vector-item"><span class="vector-check">→</span><span><strong>Data poisoning via RAG injection</strong> — malicious content in retrieved documents can manipulate LLM responses at query time</span></div>
