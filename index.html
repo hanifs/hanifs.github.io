@@ -174,7 +174,7 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
           AI pipelines need security<br>at <span style="color:var(--blue-600)">the AI layer itself</span>
         </h1>
         <p style="font-size:17px;color:var(--gray-600);margin-bottom:2rem;line-height:1.65">
-          airadar is an open-source CLI audit toolkit that detects PII leakage, tests adversarial injection resistance, scores AI governance policies, and validates IAM controls — before incidents happen.
+          airadar is an open-source CLI audit toolkit that detects PII leakage, tests adversarial injection resistance, scores AI governance policies, and validates IAM controls before incidents happen.
         </p>
         <div style="display:flex;gap:1rem;flex-wrap:wrap">
           <a href="https://github.com/hanifs/ai-audit-kit" class="btn btn-primary">View on GitHub</a>
@@ -264,12 +264,12 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
   <div class="container">
     <div class="section-label">The problem</div>
     <h2>Traditional security tools miss the AI layer</h2>
-    <p style="color:var(--gray-600);max-width:640px">As organisations deploy AI tools like Microsoft 365 Copilot and Azure OpenAI-powered assistants, the attack surface shifts. The question is no longer just what the AI can do — it's what data it can access, what it might leak, and whether anyone is auditing its behaviour in production.</p>
+    <p style="color:var(--gray-600);max-width:640px">As organisations deploy AI tools like Microsoft 365 Copilot and Azure OpenAI-powered assistants, the attack surface shifts. The question is no longer just what the AI can do. It's what data it can access, what it might leak, and whether anyone is auditing its behaviour in production.</p>
     <div class="problem-grid">
       <div class="problem-card">
         <div class="icon">📄</div>
         <h3>PII flows into RAG pipelines unscreened</h3>
-        <p>Patient notes, HR files, and contracts get embedded into vector databases raw. The LLM retrieves and echoes SSNs, DOBs, and account numbers to anyone querying — including people who shouldn't have access.</p>
+        <p>Patient notes, HR files, and contracts get embedded into vector databases raw. The LLM retrieves and echoes SSNs, DOBs, and account numbers to anyone querying, including people who shouldn't have access.</p>
       </div>
       <div class="problem-card">
         <div class="icon">💬</div>
@@ -284,7 +284,7 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
       <div class="problem-card">
         <div class="icon">⚙️</div>
         <h3>IAM policies grant AI agents too much access</h3>
-        <p>Azure RBAC roles with wildcard permissions on Key Vault, Storage, and SQL create excessive agency risk — especially as AI agents begin taking autonomous actions on behalf of users.</p>
+        <p>Azure RBAC roles with wildcard permissions on Key Vault, Storage, and SQL create excessive agency risk. Especially as AI agents begin taking autonomous actions on behalf of users.</p>
       </div>
     </div>
   </div>
@@ -293,8 +293,8 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
 <section id="about">
   <div class="container">
     <div class="section-label">About the author</div>
-    <h2>14+ years across SDLC, enterprise IT,<br>QA automation, and AI security.</h2>
-    <p style="color:var(--gray-600);max-width:640px;margin-bottom:.5rem">Built by <strong>hanifs</strong> — bringing engineering rigour to AI governance problems most teams treat as afterthoughts. The depth comes from having worked across the full stack: from QA automation and enterprise infrastructure to Microsoft 365 governance and hands-on AI pipeline security.</p>
+    <h2>14+ years across SDLC, Enterprise IT,<br>QA automation, and AI security.</h2>
+    <p style="color:var(--gray-600);max-width:640px;margin-bottom:.5rem">Built by <strong>hanifs</strong>! Bringing engineering rigour to AI governance problems most teams treat as afterthoughts. The depth comes from having worked across the full stack: from QA automation and enterprise infrastructure to Microsoft 365 governance and hands-on AI pipeline security.</p>
     <div class="cred-grid">
       <div class="cred-item">
         <div class="cred-dot"></div>
@@ -307,28 +307,28 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
         <div class="cred-dot"></div>
         <div>
           <h3>Healthcare AI & PII compliance</h3>
-          <p>Built Microsoft Presidio-based PII/HIPAA redaction pipeline — masking sensitive data before it reaches LLM endpoints, with HIPAA Safe Harbor §164.514(b)(2) validation</p>
+          <p>Built Microsoft Presidio-based PII/HIPAA redaction pipeline. Masking sensitive data before it reaches LLM endpoints, with HIPAA Safe Harbor §164.514(b)(2) validation</p>
         </div>
       </div>
       <div class="cred-item">
         <div class="cred-dot"></div>
         <div>
           <h3>Identity-aware AI access control</h3>
-          <p>Azure AI Search + RBAC security trimming — role-based document isolation preventing unauthorised AI retrieval at the vector search layer</p>
+          <p>Azure AI Search + RBAC security trimming. Role-based document isolation preventing unauthorised AI retrieval at the vector search layer</p>
         </div>
       </div>
       <div class="cred-item">
         <div class="cred-dot"></div>
         <div>
           <h3>Azure AI Content Safety</h3>
-          <p>Content filtering and safety evaluation for AI-generated outputs — integrated into AI pipelines to detect harmful, sensitive, and policy-violating content before delivery</p>
+          <p>Content filtering and safety evaluation for AI-generated outputs. Integrated into AI pipelines to detect harmful, sensitive, and policy-violating content before delivery</p>
         </div>
       </div>
       <div class="cred-item">
         <div class="cred-dot"></div>
         <div>
           <h3>QA automation & adversarial testing</h3>
-          <p>13+ years of boundary and edge case testing — applied to LLM behavioural audits, hallucination detection, and prompt injection resistance testing for Microsoft Copilot</p>
+          <p>13+ years of boundary and edge case testing. Applied to LLM behavioural audits, hallucination detection, and prompt injection resistance testing for Microsoft Copilot</p>
         </div>
       </div>
       <div class="cred-item">
@@ -355,7 +355,7 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
   <div class="container">
     <div class="section-label">The toolkit</div>
     <h2>Four audit modules. One command.</h2>
-    <p style="color:var(--gray-600);max-width:620px">Every module runs locally — no API calls, no cloud exposure, no ongoing cost. Each produces a structured JSON audit log alongside the terminal report for compliance record-keeping.</p>
+    <p style="color:var(--gray-600);max-width:620px">Every module runs locally. No API calls, no cloud exposure, no ongoing cost. Each produces a structured JSON audit log alongside the terminal report for compliance record-keeping.</p>
     <div class="modules-grid">
       <div class="module-card">
         <div class="module-num">Module 01</div>
