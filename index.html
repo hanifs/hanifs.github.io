@@ -134,15 +134,129 @@ footer .inner{max-width:880px;margin:0 auto;padding:0 2rem;display:flex;align-it
   </div>
 </nav>
 
+<style>
+.hero{padding:5rem 0 0;background:#fff}
+.hero-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-left{}
+.hero-right{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;padding:2rem}
+.hero-right h3{font-size:14px;font-weight:600;color:var(--gray-800);margin-bottom:1.25rem;letter-spacing:.02em;text-transform:uppercase}
+.fw-badge{display:flex;align-items:flex-start;gap:12px;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--gray-200)}
+.fw-badge:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.fw-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.fw-badge-text h4{font-size:14px;font-weight:500;color:var(--gray-800);margin-bottom:2px}
+.fw-badge-text p{font-size:12px;color:var(--gray-400);line-height:1.5}
+.fw-badge-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
+.fw-tag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px}
+
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;margin:3rem 0 0}
+.stat-item{padding:1.5rem;text-align:center;border-right:1px solid var(--gray-200);background:#fff}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:36px;font-weight:600;color:var(--blue-600);letter-spacing:-.02em;line-height:1}
+.stat-label{font-size:13px;color:var(--gray-400);margin-top:.4rem;line-height:1.4}
+
+@media(max-width:640px){
+  .hero-split{grid-template-columns:1fr}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .stat-item:nth-child(2){border-right:none}
+  .stat-item:nth-child(3){border-top:1px solid var(--gray-200)}
+  .stat-item:nth-child(4){border-top:1px solid var(--gray-200);border-right:none}
+}
+</style>
+
 <section class="hero">
   <div class="container">
-    <div class="badge">open source · MIT license · runs 100% locally</div>
-    <h1>AI pipelines need security<br>at <span>the AI layer itself</span></h1>
-    <p class="hero-sub">airadar is an open-source CLI audit toolkit that detects PII leakage, tests adversarial injection resistance, scores AI governance policies, and validates IAM controls — before incidents happen.</p>
-    <div class="hero-links">
-      <a href="https://github.com/hanifs/ai-audit-kit" class="btn btn-primary">View on GitHub</a>
-      <a href="#demo" class="btn btn-secondary">See it in action</a>
+    <div class="hero-split">
+
+      <!-- Left -->
+      <div class="hero-left">
+        <div class="badge">open source · MIT license · runs 100% locally</div>
+        <h1 style="font-size:38px;font-weight:600;line-height:1.2;letter-spacing:-.02em;margin-bottom:1.25rem">
+          AI pipelines need security<br>at <span style="color:var(--blue-600)">the AI layer itself</span>
+        </h1>
+        <p style="font-size:17px;color:var(--gray-600);margin-bottom:2rem;line-height:1.65">
+          airadar is an open-source CLI audit toolkit that detects PII leakage, tests adversarial injection resistance, scores AI governance policies, and validates IAM controls — before incidents happen.
+        </p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="https://github.com/hanifs/ai-audit-kit" class="btn btn-primary">View on GitHub</a>
+          <a href="#demo" class="btn btn-secondary">See it in action</a>
+        </div>
+      </div>
+
+      <!-- Right — Framework coverage -->
+      <div class="hero-right">
+        <h3>Framework Coverage</h3>
+
+        <div class="fw-badge">
+          <div class="fw-icon" style="background:var(--blue-50)">🏛️</div>
+          <div class="fw-badge-text">
+            <h4>NIST AI RMF</h4>
+            <p>GOVERN · MAP · MEASURE · MANAGE</p>
+            <div class="fw-badge-tags">
+              <span class="fw-tag" style="background:var(--blue-50);color:var(--blue-800)">24 checks</span>
+              <span class="fw-tag" style="background:var(--blue-50);color:var(--blue-800)">Weighted scoring</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fw-badge">
+          <div class="fw-icon" style="background:var(--red-50)">🛡️</div>
+          <div class="fw-badge-text">
+            <h4>OWASP LLM Top 10</h4>
+            <p>LLM01 · LLM02 · LLM04 · LLM06 · LLM07 · LLM08 · LLM09 · LLM10</p>
+            <div class="fw-badge-tags">
+              <span class="fw-tag" style="background:var(--red-50);color:var(--red-800)">30 payloads</span>
+              <span class="fw-tag" style="background:var(--red-50);color:var(--red-800)">Adversarial testing</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fw-badge">
+          <div class="fw-icon" style="background:var(--teal-50)">🏥</div>
+          <div class="fw-badge-text">
+            <h4>HIPAA Safe Harbor</h4>
+            <p>§164.514(b)(2) — 15+ PHI entity types</p>
+            <div class="fw-badge-tags">
+              <span class="fw-tag" style="background:var(--teal-50);color:var(--teal-800)">Microsoft Presidio</span>
+              <span class="fw-tag" style="background:var(--teal-50);color:var(--teal-800)">Audit log</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fw-badge">
+          <div class="fw-icon" style="background:var(--amber-50)">☁️</div>
+          <div class="fw-badge-text">
+            <h4>Azure IAM & Zero-Trust</h4>
+            <p>RBAC · Conditional Access · CIS Azure</p>
+            <div class="fw-badge-tags">
+              <span class="fw-tag" style="background:var(--amber-50);color:var(--amber-800)">Least-privilege</span>
+              <span class="fw-tag" style="background:var(--amber-50);color:var(--amber-800)">10 rule checks</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-num">30</div>
+        <div class="stat-label">Adversarial<br>payloads</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24</div>
+        <div class="stat-label">Governance<br>checks</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">PII entity<br>types</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Audit<br>modules</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
